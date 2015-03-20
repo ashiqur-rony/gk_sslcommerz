@@ -1,17 +1,7 @@
 # SSLCommerz Payment Gateway
-Contributors: goodkoding
-Tags: payment gateway, payment, BDT, USD, Taka, Visa, Master Card, Internet Banking, BKash
-Requires at least: 3.9.2
-Tested up to: 4.0.1
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
-
-Integrate the SSLCommerz payment gateway to WordPress website.
-
-## Description
 This plugin enables the feature to integrate [SSLCommerz](https://sslcommerz.com) payment gateway to WordPress website using widgets or shortcodes.
 
-**Features**
+## Features
 
 * Integrate SSLCommerz payment gateway
 * Ability to use both test mode and live mode
