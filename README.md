@@ -11,9 +11,9 @@ This plugin enables the feature to integrate [SSLCommerz](https://sslcommerz.com
 * Email notification upon successful payment
 
 ## Installation
-1. Upload \"gk-sslcommerz\" directory inside the \"/wp-content/plugins/\" directory.
-2. Activate the plugin through the \"Plugins\" menu in WordPress.
-3. Go to \"SSLCommerz\" from the menu and set your SSLCommerz account information.
+1. Upload "gk-sslcommerz" directory inside the "/wp-content/plugins/" directory.
+2. Activate the plugin through the "Plugins" menu in WordPress.
+3. Go to "SSLCommerz" from the menu and set your SSLCommerz account information.
 
 ## Frequently Asked Questions
 **Do I need an active SSLCommerz account?**
