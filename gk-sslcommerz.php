@@ -31,3 +31,13 @@ function deactivate_gk_sslcommerz() {
 	require_once plugin_dir_path( __FILE__ ) . 'class/gk-sslcommerz-deactivator.php';
 	gk_sslcommerz_deactivator::activate();
 }
+
+/**
+ * Load the plugin and start the magic!
+ */
+function gk_sslcommerz_start() {
+	require_once plugin_dir_path( __FILE__ ) . 'class/gk-sslcommerz.php';
+	$gksslcommerz = new gk_sslcommerz();
+	$gksslcommerz->run();
+}
+gk_sslcommerz_start();

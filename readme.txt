@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Integrate the SSLCommerz payment gateway to WordPress website.
 
 == Description ==
-This plugin enables the feature to integrate [SSLCommerz](https://sslcommerz.com) payment gateway to WordPress website using widgets or shortcodes.
+This plugin enables the feature to integrate [SSLCommerz](https://sslcommerz.com.bd) payment gateway to WordPress website using widgets or shortcodes.
 
 **Features**
 * Integrate SSLCommerz payment gateway
@@ -26,7 +26,7 @@ This plugin enables the feature to integrate [SSLCommerz](https://sslcommerz.com
 
 == Frequently Asked Questions ==
 = Do I need an active SSLCommerz account? =
-Yes. You need to subscribe and have an active contract with [SSLCommerz](https://sslcommerz.com) to use this plugin. You can get a discounted subscription from [GoodKoding](https://goodkoding.com/).
+Yes. You need to subscribe and have an active contract with [SSLCommerz](https://sslcommerz.com.bd) to use this plugin. You can get a discounted subscription from [GoodKoding](https://goodkoding.com/).
 
 = I don't have an SSLCommerz account. Can I still test this plugin? =
 Absolutely. You can test the plugin and see how the widgets works. But to actually receive payments, you have to open an account.
