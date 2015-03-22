@@ -37,6 +37,7 @@ class gk_sslcommerz {
 		$admin = new gk_sslcommerz_admin( $this->get_version(), $this->get_plugin_slug() );
 		$this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_menu', $admin, 'add_admin_menu' );
+		$this->loader->add_action( 'admin_init', $admin, 'add_admin_init' );
 
 	}
 
