@@ -18,9 +18,11 @@ class gk_sslcommerz_admin {
 	}
 
 	public function enqueue_styles() {
+		wp_register_style('gk-sslcommerz-admin', plugins_url( '../css/admin.css', __FILE__ ));
+		wp_enqueue_style('gk-sslcommerz-admin');
 
-		//add style here
-
+		wp_register_script('gk-sslcommerz-admin-js', plugins_url( '../js/admin.js', __FILE__ ), array('jquery'), '', true);
+		wp_enqueue_script('gk-sslcommerz-admin-js');
 	}
 
 	/**
@@ -78,6 +80,37 @@ class gk_sslcommerz_admin {
 			'gk-sslcommerz-options',
 			'gk_sslcommerz_credentials'
 		);
+
+		add_settings_section(
+			'gk_sslcommerz_pages',
+			__('Target Pages', $this->plugin_slug),
+			array( $this, 'pages_info' ),
+			'gk-sslcommerz-options'
+		);
+
+		add_settings_field(
+			'ssl_success_page',
+			__('Success Page', $this->plugin_slug),
+			array( $this, 'success_page_callback' ),
+			'gk-sslcommerz-options',
+			'gk_sslcommerz_pages'
+		);
+
+		add_settings_field(
+			'ssl_fail_page',
+			__('Failed Page', $this->plugin_slug),
+			array( $this, 'fail_page_callback' ),
+			'gk-sslcommerz-options',
+			'gk_sslcommerz_pages'
+		);
+
+		add_settings_field(
+			'ssl_cancel_page',
+			__('Cancelled Page', $this->plugin_slug),
+			array( $this, 'cancel_page_callback' ),
+			'gk-sslcommerz-options',
+			'gk_sslcommerz_pages'
+		);
 	}
 
 	/**
@@ -118,7 +151,15 @@ class gk_sslcommerz_admin {
 	 */
 	public function credentials_info()
 	{
-		print __('Provide SSL Commerz credentials below:', $this->plugin_slug);
+		print __('Set the SSL Commerz credentials from here. These values are used to authenticate the merchant while processing the payment.', $this->plugin_slug);
+	}
+
+	/**
+	 * Print the Section text
+	 */
+	public function pages_info()
+	{
+		print __('Select the pages for different payment status. User will be redirected to these pages based on their payment status.', $this->plugin_slug);
 	}
 
 	/**
@@ -164,6 +205,75 @@ class gk_sslcommerz_admin {
 			'<input type="checkbox" id="ssl_testbox" name="gk_sslcommerz_info[ssl_testbox]" value="1" %s /><br />%s',
 			(!isset( $this->options['ssl_testbox'] ) || $this->options['ssl_testbox'] == 1) ? 'checked="checked"' : '',
 			'<small>'.__('Un-check this to enable live payment.', $this->plugin_slug).'</small>'
+		);
+	}
+
+	/**
+	 * Get the settings option array and print one of its values
+	 */
+	public function success_page_callback()
+	{
+		$args = array(
+			'depth'                 => 0,
+			'child_of'              => 0,
+			'selected'              => isset( $this->options['ssl_success_page'] ) ? $this->options['ssl_success_page'] : 0,
+			'echo'                  => 0,
+			'name'                  => 'ssl_success_page',
+			'id'                    => null, // string
+			'show_option_none'      => __('None', $this->plugin_slug), // string
+			'show_option_no_change' => null, // string
+			'option_none_value'     => 0, // string
+		);
+		printf(
+			'%s<br />%s',
+			wp_dropdown_pages($args),
+			'<small>'.__('Where the user will be redirected to after successful payment. If none selected user will be redirected to home page.', $this->plugin_slug).'</small>'
+		);
+	}
+
+	/**
+	 * Get the settings option array and print one of its values
+	 */
+	public function fail_page_callback()
+	{
+		$args = array(
+			'depth'                 => 0,
+			'child_of'              => 0,
+			'selected'              => isset( $this->options['ssl_fail_page'] ) ? $this->options['ssl_fail_page'] : 0,
+			'echo'                  => 0,
+			'name'                  => 'ssl_fail_page',
+			'id'                    => null, // string
+			'show_option_none'      => __('None', $this->plugin_slug), // string
+			'show_option_no_change' => null, // string
+			'option_none_value'     => 0, // string
+		);
+		printf(
+			'%s<br />%s',
+			wp_dropdown_pages($args),
+			'<small>'.__('Where the user will be redirected to after failed payment. If none selected user will be redirected to home page.', $this->plugin_slug).'</small>'
+		);
+	}
+
+	/**
+	 * Get the settings option array and print one of its values
+	 */
+	public function cancel_page_callback()
+	{
+		$args = array(
+			'depth'                 => 0,
+			'child_of'              => 0,
+			'selected'              => isset( $this->options['ssl_cancel_page'] ) ? $this->options['ssl_cancel_page'] : 0,
+			'echo'                  => 0,
+			'name'                  => 'ssl_cancel_page',
+			'id'                    => null, // string
+			'show_option_none'      => __('None', $this->plugin_slug), // string
+			'show_option_no_change' => null, // string
+			'option_none_value'     => 0, // string
+		);
+		printf(
+			'%s<br />%s',
+			wp_dropdown_pages($args),
+			'<small>'.__('Where the user will be redirected to after cancelling the payment. If none selected user will be redirected to home page.', $this->plugin_slug).'</small>'
 		);
 	}
 } 

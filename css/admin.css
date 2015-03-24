@@ -1,0 +1,20 @@
+/**
+ * CSS file to stylize the admin area of SSLCommerz plugin
+ * @author: GoodKoding
+ * @author_url: http://goodkoding.com
+ **/
+.gk-sslcommerz-options h3 {
+    cursor: pointer;
+    padding: 10px;
+    background: #CCCCCC;
+    color: #666666;
+}
+
+.gk-sslcommerz-options h3 span.dashicons {
+    float: right;
+}
+
+.gk-sslcommerz-options h3.active {
+    background: #333333;
+    color: #CCCCCC;
+}

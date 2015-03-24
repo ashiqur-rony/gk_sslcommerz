@@ -6,7 +6,7 @@
  * @url http://goodkoding.com
  **/
 ?>
-<div class="wrap">
+<div class="wrap gk-sslcommerz-options">
 	<h2><?php _e('SSL Commerz Options', $this->plugin_slug); ?></h2>
 	<form method="post" action="options.php" class="gk-sslcommerz-admin-form">
 		<?php
@@ -15,4 +15,5 @@
 		submit_button();
 		?>
 	</form>
+	<div class="gk-copyright"><?php printf(__('Plugin developed by <a href="%s" target="_blank">GoodKoding</a>', $this->plugin_slug), 'http://goodkoding.com'); ?></div>
 </div>
