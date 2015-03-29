@@ -50,7 +50,7 @@ class gk_sslcommerz_admin {
 		);
 
 		add_settings_field(
-			'ssl_username',
+			'gk_sslcommerz_username',
 			__('SSL Commerz Username', $this->plugin_slug),
 			array( $this, 'username_callback' ),
 			'gk-sslcommerz-options',
@@ -58,7 +58,7 @@ class gk_sslcommerz_admin {
 		);
 
 		add_settings_field(
-			'ssl_password',
+			'gk_sslcommerz_password',
 			__('SSL Commerz Password', $this->plugin_slug),
 			array( $this, 'password_callback' ),
 			'gk-sslcommerz-options',
@@ -66,7 +66,7 @@ class gk_sslcommerz_admin {
 		);
 
 		add_settings_field(
-			'ssl_url',
+			'gk_sslcommerz_url',
 			__('Payment URL', $this->plugin_slug),
 			array( $this, 'url_callback' ),
 			'gk-sslcommerz-options',
@@ -74,8 +74,8 @@ class gk_sslcommerz_admin {
 		);
 
 		add_settings_field(
-			'ssl_testbox',
-			__('Enable Testbox', $this->plugin_slug),
+			'gk_sslcommerz_testbox',
+			__('Enable Testbox?', $this->plugin_slug),
 			array( $this, 'testbox_callback' ),
 			'gk-sslcommerz-options',
 			'gk_sslcommerz_credentials'
@@ -89,7 +89,7 @@ class gk_sslcommerz_admin {
 		);
 
 		add_settings_field(
-			'ssl_success_page',
+			'gk_sslcommerz_success_page',
 			__('Success Page', $this->plugin_slug),
 			array( $this, 'success_page_callback' ),
 			'gk-sslcommerz-options',
@@ -97,7 +97,7 @@ class gk_sslcommerz_admin {
 		);
 
 		add_settings_field(
-			'ssl_fail_page',
+			'gk_sslcommerz_fail_page',
 			__('Failed Page', $this->plugin_slug),
 			array( $this, 'fail_page_callback' ),
 			'gk-sslcommerz-options',
@@ -105,11 +105,129 @@ class gk_sslcommerz_admin {
 		);
 
 		add_settings_field(
-			'ssl_cancel_page',
+			'gk_sslcommerz_cancel_page',
 			__('Cancelled Page', $this->plugin_slug),
 			array( $this, 'cancel_page_callback' ),
 			'gk-sslcommerz-options',
 			'gk_sslcommerz_pages'
+		);
+
+		add_settings_section(
+			'gk_sslcommerz_form_options',
+			__('Payment Form Options', $this->plugin_slug),
+			array( $this, 'form_options_info' ),
+			'gk-sslcommerz-options'
+		);
+
+		add_settings_field(
+			'gk_sslcommerz_collect_customer_info',
+			__('Collect Customer Info?', $this->plugin_slug),
+			array( $this, 'customer_info_callback' ),
+			'gk-sslcommerz-options',
+			'gk_sslcommerz_form_options'
+		);
+
+		add_settings_field(
+			'gk_sslcommerz_collect_payment_description',
+			__('Collect Payment Description?', $this->plugin_slug),
+			array( $this, 'payment_description_callback' ),
+			'gk-sslcommerz-options',
+			'gk_sslcommerz_form_options'
+		);
+
+		add_settings_field(
+			'gk_sslcommerz_default_payment_description',
+			__('Default Payment Description', $this->plugin_slug),
+			array( $this, 'default_payment_description_callback' ),
+			'gk-sslcommerz-options',
+			'gk_sslcommerz_form_options'
+		);
+
+		add_settings_field(
+			'gk_sslcommerz_autofill_fields',
+			__('Autofill Payment Fields?', $this->plugin_slug),
+			array( $this, 'autofill_fields_callback' ),
+			'gk-sslcommerz-options',
+			'gk_sslcommerz_form_options'
+		);
+
+		add_settings_field(
+			'gk_sslcommerz_autofill_source',
+			__('Source of Autofill Variables', $this->plugin_slug),
+			array( $this, 'autofill_source_callback' ),
+			'gk-sslcommerz-options',
+			'gk_sslcommerz_form_options'
+		);
+
+		add_settings_field(
+			'gk_sslcommerz_autofill_amount_variable',
+			__('Autofill Amount Variable', $this->plugin_slug),
+			array( $this, 'autofill_amount_callback' ),
+			'gk-sslcommerz-options',
+			'gk_sslcommerz_form_options'
+		);
+
+		add_settings_field(
+			'gk_sslcommerz_autofill_payment_info_variable',
+			__('Autofill Payment Info Variable', $this->plugin_slug),
+			array( $this, 'autofill_payment_info_callback' ),
+			'gk-sslcommerz-options',
+			'gk_sslcommerz_form_options'
+		);
+
+		add_settings_section(
+			'gk_sslcommerz_advanced',
+			__('Advanced Settings', $this->plugin_slug),
+			array( $this, 'advanced_settings_info' ),
+			'gk-sslcommerz-options'
+		);
+
+		add_settings_field(
+			'gk_sslcommerz_service_charge',
+			__('Service Charge', $this->plugin_slug),
+			array( $this, 'service_charge_callback' ),
+			'gk-sslcommerz-options',
+			'gk_sslcommerz_advanced'
+		);
+
+		add_settings_field(
+			'gk_sslcommerz_service_charge_type',
+			__('Service Charge Type', $this->plugin_slug),
+			array( $this, 'service_charge_type_callback' ),
+			'gk-sslcommerz-options',
+			'gk_sslcommerz_advanced'
+		);
+
+		add_settings_field(
+			'gk_sslcommerz_maximum_service_charge',
+			__('Maximum Service Charge', $this->plugin_slug),
+			array( $this, 'maximum_service_charge_callback' ),
+			'gk-sslcommerz-options',
+			'gk_sslcommerz_advanced'
+		);
+
+		add_settings_field(
+			'gk_sslcommerz_service_charge_label',
+			__('Service Charge Label', $this->plugin_slug),
+			array( $this, 'service_charge_label_callback' ),
+			'gk-sslcommerz-options',
+			'gk_sslcommerz_advanced'
+		);
+
+		add_settings_field(
+			'gk_sslcommerz_review_page_instruction',
+			__('Instruction on Review Page', $this->plugin_slug),
+			array( $this, 'review_page_instruction_callback' ),
+			'gk-sslcommerz-options',
+			'gk_sslcommerz_advanced'
+		);
+
+		add_settings_field(
+			'gk_sslcommerz_payment_button_text',
+			__('Text on Payment Button', $this->plugin_slug),
+			array( $this, 'payment_button_callback' ),
+			'gk-sslcommerz-options',
+			'gk_sslcommerz_advanced'
 		);
 	}
 
@@ -129,19 +247,93 @@ class gk_sslcommerz_admin {
 	public function sanitize( $input )
 	{
 		$new_input = array();
-		if( isset( $input['ssl_username'] ) )
-			$new_input['ssl_username'] = sanitize_text_field( $input['ssl_username'] );
+		if( isset( $input['gk_sslcommerz_username'] ) ) {
+			$new_input['gk_sslcommerz_username'] = sanitize_text_field( $input['gk_sslcommerz_username'] );
+		}
 
-		if( isset( $input['ssl_password'] ) )
-			$new_input['ssl_password'] = sanitize_text_field( $input['ssl_password'] );
+		if( isset( $input['gk_sslcommerz_password'] ) ) {
+			$new_input['gk_sslcommerz_password'] = sanitize_text_field( $input['gk_sslcommerz_password'] );
+		}
 
-		if( isset( $input['ssl_url'] ) )
-			$new_input['ssl_url'] = esc_url( $input['ssl_url'] );
+		if( isset( $input['gk_sslcommerz_url'] ) ) {
+			$new_input['gk_sslcommerz_url'] = esc_url( $input['gk_sslcommerz_url'] );
+		}
 
-		if( isset( $input['ssl_testbox'] ) && $input['ssl_testbox'] == 1 )
-			$new_input['ssl_testbox'] = 1;
-		else
-			$new_input['ssl_testbox'] = 0;
+		if( isset( $input['gk_sslcommerz_testbox'] ) && $input['gk_sslcommerz_testbox'] == 1 ) {
+			$new_input['gk_sslcommerz_testbox'] = 1;
+		} else {
+			$new_input['gk_sslcommerz_testbox'] = 0;
+		}
+
+		if( isset( $input['gk_sslcommerz_success_page'] ) ) {
+			$new_input['gk_sslcommerz_success_page'] = absint( $input['gk_sslcommerz_success_page'] );
+		}
+
+		if( isset( $input['gk_sslcommerz_fail_page'] ) ) {
+			$new_input['gk_sslcommerz_fail_page'] = absint( $input['gk_sslcommerz_fail_page'] );
+		}
+
+		if( isset( $input['gk_sslcommerz_cancel_page'] ) ) {
+			$new_input['gk_sslcommerz_cancel_page'] = absint( $input['gk_sslcommerz_cancel_page'] );
+		}
+
+		if( isset( $input['gk_sslcommerz_collect_customer_info'] ) && $input['gk_sslcommerz_collect_customer_info'] == 1 ) {
+			$new_input['gk_sslcommerz_collect_customer_info'] = 1;
+		} else {
+			$new_input['gk_sslcommerz_collect_customer_info'] = 0;
+		}
+
+		if( isset( $input['gk_sslcommerz_collect_payment_description'] ) && $input['gk_sslcommerz_collect_payment_description'] == 1 ) {
+			$new_input['gk_sslcommerz_collect_payment_description'] = 1;
+		} else {
+			$new_input['gk_sslcommerz_collect_payment_description'] = 0;
+		}
+
+		if( isset( $input['gk_sslcommerz_default_payment_description'] ) ) {
+			$new_input['gk_sslcommerz_default_payment_description'] = sanitize_text_field( $input['gk_sslcommerz_default_payment_description'] );
+		}
+
+		if( isset( $input['gk_sslcommerz_autofill_fields'] ) && $input['gk_sslcommerz_autofill_fields'] == 1 ) {
+			$new_input['gk_sslcommerz_autofill_fields'] = 1;
+		} else {
+			$new_input['gk_sslcommerz_autofill_fields'] = 0;
+		}
+
+		if( isset( $input['gk_sslcommerz_autofill_source'] ) ) {
+			$new_input['gk_sslcommerz_autofill_source'] = sanitize_text_field( $input['gk_sslcommerz_autofill_source'] );
+		}
+
+		if( isset( $input['gk_sslcommerz_autofill_amount_variable'] ) ) {
+			$new_input['gk_sslcommerz_autofill_amount_variable'] = sanitize_text_field( $input['gk_sslcommerz_autofill_amount_variable'] );
+		}
+
+		if( isset( $input['gk_sslcommerz_autofill_payment_info_variable'] ) ) {
+			$new_input['gk_sslcommerz_autofill_payment_info_variable'] = sanitize_text_field( $input['gk_sslcommerz_autofill_payment_info_variable'] );
+		}
+
+		if( isset( $input['gk_sslcommerz_service_charge'] ) ) {
+			$new_input['gk_sslcommerz_service_charge'] = floatval( $input['gk_sslcommerz_service_charge'] );
+		}
+
+		if( isset( $input['gk_sslcommerz_service_charge_type'] ) ) {
+			$new_input['gk_sslcommerz_service_charge_type'] = sanitize_text_field( $input['gk_sslcommerz_service_charge_type'] );
+		}
+
+		if( isset( $input['gk_sslcommerz_maximum_service_charge'] ) ) {
+			$new_input['gk_sslcommerz_maximum_service_charge'] = floatval( $input['gk_sslcommerz_maximum_service_charge'] );
+		}
+
+		if( isset( $input['gk_sslcommerz_service_charge_label'] ) ) {
+			$new_input['gk_sslcommerz_service_charge_label'] = sanitize_text_field( $input['gk_sslcommerz_service_charge_label'] );
+		}
+
+		if( isset( $input['gk_sslcommerz_review_page_instruction'] ) ) {
+			$new_input['gk_sslcommerz_review_page_instruction'] = sanitize_text_field( $input['gk_sslcommerz_review_page_instruction'] );
+		}
+
+		if( isset( $input['gk_sslcommerz_payment_button_text'] ) ) {
+			$new_input['gk_sslcommerz_payment_button_text'] = sanitize_text_field( $input['gk_sslcommerz_payment_button_text'] );
+		}
 
 		return $new_input;
 	}
@@ -163,13 +355,29 @@ class gk_sslcommerz_admin {
 	}
 
 	/**
+	 * Print the Section text
+	 */
+	public function form_options_info()
+	{
+		print __('Set the form options. These parameters determine which values to collect and how to populate fields.', $this->plugin_slug);
+	}
+
+	/**
+	 * Print the Section text
+	 */
+	public function advanced_settings_info()
+	{
+		print __('Set the advanced form options. Service charge for payment, payment confirmation page message etc. can be set from here.', $this->plugin_slug);
+	}
+
+	/**
 	 * Get the settings option array and print one of its values
 	 */
 	public function username_callback()
 	{
 		printf(
-			'<input type="text" id="ssl_username" name="gk_sslcommerz_info[ssl_username]" value="%s" />',
-			isset( $this->options['ssl_username'] ) ? esc_attr( $this->options['ssl_username']) : ''
+			'<input type="text" id="gk_sslcommerz_username" name="gk_sslcommerz_info[gk_sslcommerz_username]" required="required" value="%s" />',
+			isset( $this->options['gk_sslcommerz_username'] ) ? esc_attr( $this->options['gk_sslcommerz_username']) : ''
 		);
 	}
 
@@ -179,8 +387,8 @@ class gk_sslcommerz_admin {
 	public function password_callback()
 	{
 		printf(
-			'<input type="password" id="ssl_password" name="gk_sslcommerz_info[ssl_password]" value="%s" />',
-			isset( $this->options['ssl_password'] ) ? esc_attr( $this->options['ssl_password']) : ''
+			'<input type="password" id="gk_sslcommerz_password" name="gk_sslcommerz_info[gk_sslcommerz_password]" required="required" value="%s" />',
+			isset( $this->options['gk_sslcommerz_password'] ) ? esc_attr( $this->options['gk_sslcommerz_password']) : ''
 		);
 	}
 
@@ -190,8 +398,8 @@ class gk_sslcommerz_admin {
 	public function url_callback()
 	{
 		printf(
-			'<input type="url" id="ssl_url" name="gk_sslcommerz_info[ssl_url]" value="%s" /><br />%s',
-			isset( $this->options['ssl_url'] ) ? esc_attr( $this->options['ssl_url']) : 'https://www.sslcommerz.com.bd/gwprocess/',
+			'<input type="url" id="gk_sslcommerz_url" name="gk_sslcommerz_info[gk_sslcommerz_url]" required="required" value="%s" /><br />%s',
+			isset( $this->options['gk_sslcommerz_url'] ) ? esc_attr( $this->options['gk_sslcommerz_url']) : 'https://www.sslcommerz.com.bd/gwprocess/',
 			'<small>'.__('Default URL is: https://www.sslcommerz.com.bd/gwprocess/', $this->plugin_slug).'</small>'
 		);
 	}
@@ -202,8 +410,8 @@ class gk_sslcommerz_admin {
 	public function testbox_callback()
 	{
 		printf(
-			'<input type="checkbox" id="ssl_testbox" name="gk_sslcommerz_info[ssl_testbox]" value="1" %s /><br />%s',
-			(!isset( $this->options['ssl_testbox'] ) || $this->options['ssl_testbox'] == 1) ? 'checked="checked"' : '',
+			'<input type="checkbox" id="gk_sslcommerz_testbox" name="gk_sslcommerz_info[gk_sslcommerz_testbox]" value="1" %s /><br />%s',
+			(!isset( $this->options['gk_sslcommerz_testbox'] ) || $this->options['gk_sslcommerz_testbox'] == 1) ? 'checked="checked"' : '',
 			'<small>'.__('Un-check this to enable live payment.', $this->plugin_slug).'</small>'
 		);
 	}
@@ -218,7 +426,7 @@ class gk_sslcommerz_admin {
 			'child_of'              => 0,
 			'selected'              => isset( $this->options['ssl_success_page'] ) ? $this->options['ssl_success_page'] : 0,
 			'echo'                  => 0,
-			'name'                  => 'ssl_success_page',
+			'name'                  => 'gk_sslcommerz_success_page',
 			'id'                    => null, // string
 			'show_option_none'      => __('None', $this->plugin_slug), // string
 			'show_option_no_change' => null, // string
@@ -241,7 +449,7 @@ class gk_sslcommerz_admin {
 			'child_of'              => 0,
 			'selected'              => isset( $this->options['ssl_fail_page'] ) ? $this->options['ssl_fail_page'] : 0,
 			'echo'                  => 0,
-			'name'                  => 'ssl_fail_page',
+			'name'                  => 'gk_sslcommerz_fail_page',
 			'id'                    => null, // string
 			'show_option_none'      => __('None', $this->plugin_slug), // string
 			'show_option_no_change' => null, // string
@@ -264,7 +472,7 @@ class gk_sslcommerz_admin {
 			'child_of'              => 0,
 			'selected'              => isset( $this->options['ssl_cancel_page'] ) ? $this->options['ssl_cancel_page'] : 0,
 			'echo'                  => 0,
-			'name'                  => 'ssl_cancel_page',
+			'name'                  => 'gk_sslcommerz_cancel_page',
 			'id'                    => null, // string
 			'show_option_none'      => __('None', $this->plugin_slug), // string
 			'show_option_no_change' => null, // string
@@ -274,6 +482,172 @@ class gk_sslcommerz_admin {
 			'%s<br />%s',
 			wp_dropdown_pages($args),
 			'<small>'.__('Where the user will be redirected to after cancelling the payment. If none selected user will be redirected to home page.', $this->plugin_slug).'</small>'
+		);
+	}
+
+	/**
+	 * Get the settings option array and print one of its values
+	 */
+	public function customer_info_callback()
+	{
+		printf(
+			'<input type="checkbox" id="gk_sslcommerz_collect_customer_info" name="gk_sslcommerz_info[gk_sslcommerz_collect_customer_info]" value="1" %s /><br />%s',
+			(isset( $this->options['gk_sslcommerz_collect_customer_info'] ) && $this->options['gk_sslcommerz_collect_customer_info'] == 1) ? 'checked="checked"' : '',
+			'<small>'.__('Check this field to collect customer information.', $this->plugin_slug).'</small>'
+		);
+	}
+
+	/**
+	 * Get the settings option array and print one of its values
+	 */
+	public function payment_description_callback()
+	{
+		printf(
+			'<input type="checkbox" id="gk_sslcommerz_collect_payment_description" name="gk_sslcommerz_info[gk_sslcommerz_collect_payment_description]" value="1" %s /><br />%s',
+			(isset( $this->options['gk_sslcommerz_collect_payment_description'] ) && $this->options['gk_sslcommerz_collect_payment_description'] == 1) ? 'checked="checked"' : '',
+			'<small>'.__('Let the user (customer) set the payment description?', $this->plugin_slug).'</small>'
+		);
+	}
+
+	/**
+	 * Get the settings option array and print one of its values
+	 */
+	public function default_payment_description_callback()
+	{
+		printf(
+			'<input type="text" id="gk_sslcommerz_default_payment_description" name="gk_sslcommerz_info[gk_sslcommerz_default_payment_description]" value="%s" /><br />%s',
+			(isset( $this->options['gk_sslcommerz_default_payment_description'] ) ? $this->options['gk_sslcommerz_default_payment_description'] : ''),
+			'<small>'.__('Default payment description if not collected from user (customer) or parameters.', $this->plugin_slug).'</small>'
+		);
+	}
+
+	/**
+	 * Get the settings option array and print one of its values
+	 */
+	public function autofill_fields_callback()
+	{
+		printf(
+			'<input type="checkbox" id="gk_sslcommerz_autofill_fields" name="gk_sslcommerz_info[gk_sslcommerz_autofill_fields]" value="1" %s /><br />%s',
+			(isset( $this->options['gk_sslcommerz_autofill_fields'] ) && $this->options['gk_sslcommerz_autofill_fields'] == 1) ? 'checked="checked"' : '',
+			'<small>'.__('Check this to autofill payment fields from URL or form post values.', $this->plugin_slug).'</small>'
+		);
+	}
+
+	/**
+	 * Get the settings option array and print one of its values
+	 */
+	public function autofill_source_callback()
+	{
+		printf(
+			'<select id="gk_sslcommerz_autofill_source" name="gk_sslcommerz_info[gk_sslcommerz_autofill_source]">
+				<option value="">%s</option>
+				<option value="get" ' . ((isset( $this->options['gk_sslcommerz_autofill_source'] ) && $this->options['gk_sslcommerz_autofill_source'] == 'get') ? 'selected="selected"' : '') . '>%s</option>
+				<option value="post" ' . ((isset( $this->options['gk_sslcommerz_autofill_source'] ) && $this->options['gk_sslcommerz_autofill_source'] == 'post') ? 'selected="selected"' : '') . '>%s</option>
+			</select><br />%s',
+			__( 'None', $this->plugin_slug ),
+			__( 'URL Parameter ($_GET)', $this->plugin_slug ),
+			__( 'Post Parameter ($_POST)', $this->plugin_slug ),
+			'<small>'.__('Whether to look for the values in <code>$_GET</code> or <code>$_POST</code> of request parameters.', $this->plugin_slug).'</small>'
+		);
+	}
+
+	/**
+	 * Get the settings option array and print one of its values
+	 */
+	public function autofill_amount_callback()
+	{
+		printf(
+			'<input type="text" id="gk_sslcommerz_autofill_amount_variable" name="gk_sslcommerz_info[gk_sslcommerz_autofill_amount_variable]" value="%s" /><br />%s',
+			isset( $this->options['gk_sslcommerz_autofill_amount_variable'] ) ? esc_attr( $this->options['gk_sslcommerz_autofill_amount_variable']) : '',
+			'<small>'.__('Select the parameter name for amount variable. If the amount values is in <code>$_POST[amount]</code> then write <code>amount</code> in this field.', $this->plugin_slug).'</small>'
+		);
+	}
+
+	/**
+	 * Get the settings option array and print one of its values
+	 */
+	public function autofill_payment_info_callback()
+	{
+		printf(
+			'<input type="text" id="gk_sslcommerz_autofill_payment_info_variable" name="gk_sslcommerz_info[gk_sslcommerz_autofill_payment_info_variable]" value="%s" /><br />%s',
+			isset( $this->options['gk_sslcommerz_autofill_payment_info_variable'] ) ? esc_attr( $this->options['gk_sslcommerz_autofill_payment_info_variable']) : '',
+			'<small>'.__('Select the parameter name for payment info variable. If the payment info is in <code>$_POST[info]</code> then write <code>info</code> in this field.', $this->plugin_slug).'</small>'
+		);
+	}
+
+	/**
+	 * Get the settings option array and print one of its values
+	 */
+	public function service_charge_callback()
+	{
+		printf(
+			'<input type="number" min="0" step="any" id="gk_sslcommerz_service_charge" name="gk_sslcommerz_info[gk_sslcommerz_service_charge]" value="%s" /><br />%s',
+			isset( $this->options['gk_sslcommerz_service_charge'] ) ? esc_attr( $this->options['gk_sslcommerz_service_charge']) : 0,
+			'<small>'.__('Set the service charge for the payment processing. Zero means no service charge.', $this->plugin_slug).'</small>'
+		);
+	}
+
+	/**
+	 * Get the settings option array and print one of its values
+	 */
+	public function service_charge_type_callback()
+	{
+		printf(
+			'<select id="gk_sslcommerz_service_charge_type" name="gk_sslcommerz_info[gk_sslcommerz_service_charge_type]">
+				<option value="percentage" ' . ((isset( $this->options['gk_sslcommerz_service_charge_type'] ) && $this->options['gk_sslcommerz_service_charge_type'] == 'percentage') ? 'selected="selected"' : '') . '>%s</option>
+				<option value="amount" ' . ((isset( $this->options['gk_sslcommerz_service_charge_type'] ) && $this->options['gk_sslcommerz_service_charge_type'] == 'amount') ? 'selected="selected"' : '') . '>%s</option>
+			</select><br />%s',
+			__( '% (Percentage of total)', $this->plugin_slug ),
+			__( 'Fixed (Fixed amount)', $this->plugin_slug ),
+			'<small>'.__('Set how the service charge will be calculated.', $this->plugin_slug).'</small>'
+		);
+	}
+
+	/**
+	 * Get the settings option array and print one of its values
+	 */
+	public function maximum_service_charge_callback()
+	{
+		printf(
+			'<input type="number" min="0" step="any" id="gk_sslcommerz_maximum_service_charge" name="gk_sslcommerz_info[gk_sslcommerz_maximum_service_charge]" value="%s" /><br />%s',
+			isset( $this->options['gk_sslcommerz_maximum_service_charge'] ) ? esc_attr( $this->options['gk_sslcommerz_maximum_service_charge']) : 0,
+			'<small>'.__('Zero means no limit.', $this->plugin_slug).'</small>'
+		);
+	}
+
+	/**
+	 * Get the settings option array and print one of its values
+	 */
+	public function service_charge_label_callback()
+	{
+		printf(
+			'<input type="text" id="gk_sslcommerz_service_charge_label" name="gk_sslcommerz_info[gk_sslcommerz_service_charge_label]" value="%s" /><br />%s',
+			isset( $this->options['gk_sslcommerz_service_charge_label'] ) ? esc_attr( $this->options['gk_sslcommerz_service_charge_label']) : '',
+			'<small>'.__('Label of the service charge (e.g. Processing fee or Shipping charge).', $this->plugin_slug).'</small>'
+		);
+	}
+
+	/**
+	 * Get the settings option array and print one of its values
+	 */
+	public function review_page_instruction_callback()
+	{
+		printf(
+			'<textarea id="gk_sslcommerz_review_page_instruction" name="gk_sslcommerz_info[gk_sslcommerz_review_page_instruction]">%s</textarea><br />%s',
+			isset( $this->options['gk_sslcommerz_review_page_instruction'] ) ? esc_attr( $this->options['gk_sslcommerz_review_page_instruction']) : '',
+			'<small>'.__('Set the text you want to show the users on the payment review page.', $this->plugin_slug).'</small>'
+		);
+	}
+
+	/**
+	 * Get the settings option array and print one of its values
+	 */
+	public function payment_button_callback()
+	{
+		printf(
+			'<input type="text" id="gk_sslcommerz_payment_button_text" name="gk_sslcommerz_info[gk_sslcommerz_payment_button_text]" value="%s" /><br />%s',
+			isset( $this->options['gk_sslcommerz_payment_button_text'] ) ? esc_attr( $this->options['gk_sslcommerz_payment_button_text']) : '',
+			'<small>'.__('Text to display on the <code>Pay now</code> button.', $this->plugin_slug).'</small>'
 		);
 	}
 } 

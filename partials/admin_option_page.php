@@ -8,6 +8,7 @@
 ?>
 <div class="wrap gk-sslcommerz-options">
 	<h2><?php _e('SSL Commerz Options', $this->plugin_slug); ?></h2>
+	<?php settings_errors(); ?>
 	<form method="post" action="options.php" class="gk-sslcommerz-admin-form">
 		<?php
 		settings_fields( 'gk_sslcommerz' );
