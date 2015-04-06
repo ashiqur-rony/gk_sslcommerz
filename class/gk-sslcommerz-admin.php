@@ -435,7 +435,7 @@ class gk_sslcommerz_admin {
 		printf(
 			'%s<br />%s',
 			wp_dropdown_pages($args),
-			'<small>'.__('Where the user will be redirected to after successful payment. If none selected user will be redirected to home page.', $this->plugin_slug).'</small>'
+			'<small>'.__('Where the user will be redirected to after successful payment. If none selected a page with successful payment invoice will be displayed.', $this->plugin_slug).'</small>'
 		);
 	}
 
@@ -458,7 +458,7 @@ class gk_sslcommerz_admin {
 		printf(
 			'%s<br />%s',
 			wp_dropdown_pages($args),
-			'<small>'.__('Where the user will be redirected to after failed payment. If none selected user will be redirected to home page.', $this->plugin_slug).'</small>'
+			'<small>'.__('Where the user will be redirected to after failed payment. If none selected a page with failed payment invoice will be displayed.', $this->plugin_slug).'</small>'
 		);
 	}
 

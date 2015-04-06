@@ -15,6 +15,11 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
+ * Load the default settings
+ */
+require_once 'includes/gk-sslcommerz-settings.php';
+
+/**
  * Hook plugin activation
  */
 register_activation_hook( __FILE__, 'activate_gk_sslcommerz' );
@@ -29,7 +34,18 @@ function activate_gk_sslcommerz() {
 register_deactivation_hook( __FILE__, 'deactivate_gk_sslcommerz' );
 function deactivate_gk_sslcommerz() {
 	require_once plugin_dir_path( __FILE__ ) . 'class/gk-sslcommerz-deactivator.php';
-	gk_sslcommerz_deactivator::activate();
+	gk_sslcommerz_deactivator::deactivate();
+}
+
+/**
+ * Hook to check plugin updates
+ */
+add_action( 'plugins_loaded', 'gk_sslcommerz_update_db_check' );
+function gk_sslcommerz_update_db_check() {
+	global $gk_sslcommerz_db_version;
+	if ( get_site_option( 'gk_sslcommerz_db_version' ) != $gk_sslcommerz_db_version ) {
+		activate_gk_sslcommerz();
+	}
 }
 
 /**

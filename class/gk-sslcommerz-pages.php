@@ -36,8 +36,71 @@ class gk_sslcommerz_pages {
 		}
 	}
 
+	public function gk_sslcommerz_success( $posts ) {
+		global $wp, $wp_query, $wpdb, $gk_sslcommerz_payments_table;
+
+		if ( strtolower($_SERVER['REQUEST_METHOD']) == 'post' &&
+		     ( strcasecmp( $wp->request, $this->slug ) == 0 || $wp->query_vars['page_id'] == $this->slug ) )
+		{
+			/**
+			 * @ToDo: Validate the payment request and update the payment row in database.
+			 * @ToDo: Send email to admin and customer.
+			 */
+			$this->options = get_option( 'gk_sslcommerz_info' );
+			$success_page_id = $this->options['gk_sslcommerz_success_page'];
+			if( $success_page_id && $success_page_id > 0 ) {
+				wp_safe_redirect( get_permalink( $success_page_id ) );
+				exit;
+			}
+
+			/**
+			 * @ToDo: Generate post with invoice template
+			 */
+		}
+	}
+
+	public function gk_sslcommerz_fail( $posts ) {
+		global $wp, $wp_query, $wpdb, $gk_sslcommerz_payments_table;
+
+		if ( strtolower($_SERVER['REQUEST_METHOD']) == 'post' &&
+		     ( strcasecmp( $wp->request, $this->slug ) == 0 || $wp->query_vars['page_id'] == $this->slug ) )
+		{
+			/**
+			 * @ToDo: Update the payment row in database
+			 */
+			$this->options = get_option( 'gk_sslcommerz_info' );
+			$fail_page_id = $this->options['gk_sslcommerz_fail_page'];
+			if( $fail_page_id && $fail_page_id > 0 ) {
+				wp_safe_redirect( get_permalink( $fail_page_id ) );
+				exit;
+			}
+
+			/**
+			 * @ToDo: Generate post with invoice template
+			 */
+		}
+	}
+
+	public function gk_sslcommerz_cancel( $posts ) {
+		global $wp, $wp_query, $wpdb, $gk_sslcommerz_payments_table;
+
+		if ( strcasecmp( $wp->request, $this->slug ) == 0 || $wp->query_vars['page_id'] == $this->slug ) {
+			/**
+			 * @ToDo: Update the payment row in database
+			 */
+			$this->options = get_option( 'gk_sslcommerz_info' );
+			$cancel_page_id = $this->options['gk_sslcommerz_cancel_page'];
+			if( $cancel_page_id && $cancel_page_id > 0 ) {
+				wp_safe_redirect( get_permalink( $cancel_page_id ) );
+				exit;
+			}
+			wp_safe_redirect( home_url() );
+			exit;
+		}
+	}
+
 	public function gk_sslcommerz_cart( $posts ) {
-		global $wp, $wp_query;
+		global $wp, $wp_query, $wpdb, $gk_sslcommerz_payments_table;
 
 		if ( strtolower($_SERVER['REQUEST_METHOD']) == 'post' &&
 		    ( strcasecmp( $wp->request, $this->slug ) == 0 || $wp->query_vars['page_id'] == $this->slug ) )
@@ -56,7 +119,6 @@ class gk_sslcommerz_pages {
 			$this->options = get_option( 'gk_sslcommerz_info' );
 
 			$username = $this->options['gk_sslcommerz_username'];
-			$password = $this->options['gk_sslcommerz_password'];
 			$url = $this->options['gk_sslcommerz_url'];
 			$testbox = ( isset( $this->options['gk_sslcommerz_testbox'] ) && $this->options['gk_sslcommerz_testbox'] == 1 ) ? true : false;
 
@@ -68,11 +130,6 @@ class gk_sslcommerz_pages {
 				$fail_url = site_url( '/?page_id=gk-sslcommerz-fail' );
 				$cancel_url = site_url( '/?page_id=gk-sslcommerz-cancel' );
 			}
-
-			$transaction_id = strtoupper( substr( $username, 0, 3 ) ) . '-' . rand(99, 999);
-			/**
-			 * @todo Save data into table and generate transaction id
-			 */
 
 			if( $testbox && !strstr( $url, 'testbox' ) ) {
 				$url = rtrim( $url, '/' ) . '/testbox/';
@@ -108,6 +165,33 @@ class gk_sslcommerz_pages {
 					}
 				}
 			}
+
+			$form_data = base64_encode( serialize( $_POST ) );
+			$submitted_data = base64_encode( serialize( array(
+								'amount' => $amount,
+								'currency' => $currency,
+								'service_charge' => $service_charge,
+								'service_charge_label' => $service_charge_label,
+								'total' => $total
+							) ) );
+			$payment_date = date('Y-m-d H:i:s');
+
+			$wpdb->insert(
+				$wpdb->prefix . $gk_sslcommerz_payments_table,
+				array(
+					'form_data' => $form_data,
+					'submitted_data' => $submitted_data,
+					'payment_date' => $payment_date
+				),
+				array(
+					'%s',
+					'%s',
+					'%s'
+				)
+			);
+
+			$insert_id = $wpdb->insert_id;
+			$transaction_id = strtoupper( substr( $username, 0, 3 ) ) . '-' . $insert_id;
 
 			if( isset( $this->options['gk_sslcommerz_review_page_instruction'] ) ) {
 				$content .= '<div class="gk-sslcommerz-instructions">'.nl2br( $this->options['gk_sslcommerz_review_page_instruction'] ).'</div>';
