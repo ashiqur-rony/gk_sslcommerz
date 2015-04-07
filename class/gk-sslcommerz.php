@@ -142,7 +142,7 @@ class gk_sslcommerz {
 
 		$form .= '<div class="gk-form-group">';
 		$form .= '<label for="gk_sslcommerz_amount">'.__( 'Amount', $this->plugin_slug ).'</label>';
-		$form .= '<input type="number" id="gk_sslcommerz_amount" name="gk_sslcommerz_amount" min="1" placeholder="'.__('Amount in BDT', $this->plugin_slug).'" value="'.$amount.'" />';
+		$form .= '<input type="number" id="gk_sslcommerz_amount" name="gk_sslcommerz_amount" min="1" step="any" placeholder="'.__('Amount in BDT', $this->plugin_slug).'" value="'.$amount.'" />';
 		$form .= '</div>';
 
 		$form .= '<input type="hidden" name="gk_sslcommerz_currency" value="BDT" />';
