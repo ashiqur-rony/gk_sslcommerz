@@ -6,8 +6,8 @@
 .gk-sslcommerz-options h3 {
     cursor: pointer;
     padding: 10px;
-    background: #CCCCCC;
-    color: #666666;
+    background: #333333;
+    color: #CCCCCC;
 }
 
 .gk-sslcommerz-options h3 span.dashicons {
@@ -15,8 +15,8 @@
 }
 
 .gk-sslcommerz-options h3.active {
-    background: #333333;
-    color: #CCCCCC;
+    background: #039885;
+    color: #FAFAFA;
 }
 
 .gk-sslcommerz-options input[type=text],
@@ -37,4 +37,58 @@
 .gk-sslcommerz-options textarea {
     width: 450px;
     height: 120px;
+}
+
+.gk-sslcommerz-msg {
+    display: block;
+    padding: 10px;
+    background: #039885;
+    color: #FAFAFA;
+}
+
+.payments-table tr.even td {
+    background-color: #FAFAFA;
+}
+
+.payments-table tr:hover td {
+    background-color: #039885;
+    color: #FAFAFA;
+}
+
+.payments-table tr:hover td a {
+    color: #FAFAFA;
+}
+
+table.gk-sslcommerz-invoice {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px auto;
+}
+
+.gk-sslcommerz-invoice tr td, .gk-sslcommerz-invoice tr th {
+    padding: 10px;
+    background: #FAFAFA;
+    border: 1px solid #F0F0F0;
+    vertical-align: top;
+}
+
+.gk-sslcommerz-invoice tr th {
+    text-align: left;
+}
+
+.gk-sslcommerz-invoice tr td[align=right], .gk-sslcommerz-invoice tr th[align=right] {
+    text-align: right;
+}
+
+.gk-sslcommerz-payment tr th {
+    border-bottom: 1px solid #CCCCCC;
+}
+
+.gk-sslcommerz-payment tr:hover td {
+    background-color: #039885;
+    color: #FAFAFA;
+}
+
+div.notice.warning {
+    border-color: #ffba00;
 }

@@ -9,6 +9,16 @@
 <div class="wrap gk-sslcommerz-options">
 	<h2><?php _e('SSL Commerz Options', $this->plugin_slug); ?></h2>
 	<?php settings_errors(); ?>
+	<?php
+	if( isset( $this->options['gk_sslcommerz_username'] ) && strlen( $this->options['gk_sslcommerz_username'] ) > 0 ):
+	?>
+		<div class="gk-sslcommerz-msg">
+			<p>To show the default payment form within any page or post add <code>[gk-sslcommerz]</code> in the content.</p>
+			<p>To show the default payment form using template file write this code: <code>&lt;?php echo do_shortcode("[gk-sslcommerz]"); ?&gt;</code>.</p>
+		</div>
+	<?php
+	endif;
+	?>
 	<form method="post" action="options.php" class="gk-sslcommerz-admin-form">
 		<?php
 		settings_fields( 'gk_sslcommerz' );
@@ -16,5 +26,4 @@
 		submit_button();
 		?>
 	</form>
-	<div class="gk-copyright"><?php printf(__('Plugin developed by <a href="%s" target="_blank">GoodKoding</a>', $this->plugin_slug), 'http://goodkoding.com'); ?></div>
 </div>

@@ -49,6 +49,7 @@ class gk_sslcommerz_activator {
 					edit_date datetime,
 					edited_by bigint(20) UNSIGNED,
 					payment_status enum('pending', 'cancelled', 'failed', 'success', 'unknown') DEFAULT 'pending' NOT NULL,
+					is_archived tinyint(2) NOT NULL DEFAULT '0',
 					PRIMARY KEY (idpayment)
 					) $charset_collate;";
 

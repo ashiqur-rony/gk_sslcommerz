@@ -29,7 +29,22 @@ class gk_sslcommerz_admin {
 	 * Add administrative option menu
 	 */
 	public function add_admin_menu() {
-		add_menu_page( __('SSL Commerz', $this->plugin_slug), __('SSL Comerz', $this->plugin_slug), 'activate_plugins', 'gk-sslcommerz-options', array($this, 'sslcommerz_options'), 'dashicons-money', 81 );
+		add_menu_page( __('SSL Commerz', $this->plugin_slug), __('SSL Commerz', $this->plugin_slug), 'activate_plugins', 'gk-sslcommerz-options', array($this, 'sslcommerz_options'), 'dashicons-money', 81 );
+		add_submenu_page( 'gk-sslcommerz-options', __('Payment Statistics', $this->plugin_slug), __('Payment Statistics', $this->plugin_slug), 'activate_plugins', 'gk-sslcommerz-payment-statistics', array($this, 'sslcommerz_payment_statistics') );
+
+		//Rename the submenu
+		global $submenu;
+		if( isset( $submenu['gk-sslcommerz-options'] ) && isset( $submenu['gk-sslcommerz-options'][0] ) ) {
+			$submenu['gk-sslcommerz-options'][0][0] = __( 'Payment Settings', $this->plugin_slug );
+			$submenu['gk-sslcommerz-options'][0][3] = __( 'Payment Settings', $this->plugin_slug );
+		}
+	}
+
+	/**
+	 * Add footer text on the admin side
+	 */
+	public function add_admin_footer() {
+		echo sprintf( __( 'This <a href="%s" target="_blank">WordPress</a> plugin was developed by <a href="%s" target="_blank">GoodKoding</a>', $this->plugin_slug ), '//wordpress.org', 'http://goodkoding.com' );
 	}
 
 	/**
@@ -237,6 +252,50 @@ class gk_sslcommerz_admin {
 	public function sslcommerz_options() {
 		$this->options = get_option( 'gk_sslcommerz_info' );
 		require_once plugin_dir_path( __FILE__ ) . '../partials/admin_option_page.php';
+	}
+
+	/**
+	 * Display the list of payments received
+	 */
+	public function sslcommerz_payment_statistics() {
+		global $wpdb, $gk_sslcommerz_payments_table;
+
+		$this->options = get_option( 'gk_sslcommerz_info' );
+		$action = isset( $_GET['do'] ) ? esc_attr( $_GET['do'] ) : 'list';
+		$error = array();
+		$page = isset( $_GET['p'] ) ? intval( $_GET['p'] ) : 1;
+		$limit = isset( $_GET['limit'] ) ? intval( $_GET['limit'] ) : 25;
+		$order_by = isset( $_GET['order_by'] ) ? intval( $_GET['order_by'] ) : 'date';
+		$order = isset( $_GET['order'] ) ? intval( $_GET['order'] ) : 'DESC';
+		$payment_id = isset( $_GET['id'] ) ? intval( $_GET['id'] ) : 0;
+
+		if( $order_by == 'date' ) {
+			$order_by = 'payment_date';
+		} else {
+			$order_by = 'payment_status';
+		}
+
+		if( $payment_id == 0 && $action != 'list' ) {
+			$action = 'list';
+			$error[] = __( 'Invalid payment reference.', $this->plugin_slug );
+		}
+
+		switch( $action ) {
+			case 'edit':
+				break;
+
+			case 'invoice':
+				require_once plugin_dir_path( __FILE__ ) . '../partials/admin_payment_invoice.php';
+				break;
+
+			case 'archive':
+				break;
+
+			case 'list':
+			default:
+				require_once plugin_dir_path( __FILE__ ) . '../partials/admin_payment_statistics.php';
+				break;
+		}
 	}
 
 	/**

@@ -38,6 +38,10 @@ class gk_sslcommerz {
 		$this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_menu', $admin, 'add_admin_menu' );
 		$this->loader->add_action( 'admin_init', $admin, 'add_admin_init' );
+
+		if( isset( $_GET['page'] ) && in_array( $_GET['page'], array( 'gk-sslcommerz-options', 'gk-sslcommerz-payment-statistics' ) ) ) {
+			$this->loader->add_action( 'admin_footer_text', $admin, 'add_admin_footer' );
+		}
 	}
 
 	private function define_shortcodes() {
