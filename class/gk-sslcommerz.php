@@ -11,12 +11,17 @@ class gk_sslcommerz {
 	protected $loader;
 	protected $plugin_slug;
 	protected $version;
+	protected static $static_plugin_slug;
+	protected static $static_version;
 	private $options;
 
 	public function __construct() {
 
 		$this->plugin_slug = 'gk-sslcommerz';
-		$this->version = '0.1';
+		$this->version = '0.3';
+
+		self::setStaticPluginSlug($this->plugin_slug);
+		self::setStaticVersion($this->version);
 
 		$this->load_dependencies();
 		$this->define_admin_hooks();
@@ -30,6 +35,7 @@ class gk_sslcommerz {
 		require_once plugin_dir_path( __FILE__ ) . 'gk-sslcommerz-admin.php';
 		require_once plugin_dir_path( __FILE__ ) . 'gk-sslcommerz-loader.php';
 		require_once plugin_dir_path( __FILE__ ) . 'gk-sslcommerz-pages.php';
+		require_once plugin_dir_path( __FILE__ ) . 'gk-sslcommerz-widget.php';
 		$this->loader = new gk_sslcommerz_loader();
 	}
 
@@ -49,7 +55,8 @@ class gk_sslcommerz {
 	}
 
 	private function define_widgets() {
-
+		$widget = new gk_sslcommerz_widget( $this->get_version(), $this->get_plugin_slug() );
+		$this->loader->add_action( 'widgets_init', $widget, 'add_widget_init' );
 	}
 
 	private function define_pages() {
@@ -59,6 +66,22 @@ class gk_sslcommerz {
 
 	public function run() {
 		$this->loader->run();
+	}
+
+	public static function setStaticVersion( $version ) {
+		self::$static_version = $version;
+	}
+
+	public static function getStaticVersion() {
+		return self::$static_version;
+	}
+
+	public static function setStaticPluginSlug( $plugin_slug ) {
+		self::$static_plugin_slug = $plugin_slug;
+	}
+
+	public static function getStaticPluginSlug() {
+		return self::$static_plugin_slug;
 	}
 
 	public function get_version() {

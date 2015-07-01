@@ -121,6 +121,7 @@ class gk_sslcommerz_pages {
 							'error' => 'Payment was successful. Could not connect to validation server!'
 						);
 					}
+					curl_close($handle);
 
 					$wpdb->update(
 						$wpdb->prefix . $gk_sslcommerz_payments_table,
