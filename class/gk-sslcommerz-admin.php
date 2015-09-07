@@ -263,6 +263,7 @@ class gk_sslcommerz_admin {
 		$this->options = get_option( 'gk_sslcommerz_info' );
 		$action = isset( $_GET['do'] ) ? esc_attr( $_GET['do'] ) : 'list';
 		$error = array();
+		$archive = isset( $_GET['archive'] ) ? intval( $_GET['archive'] ) : 0;
 		$page = isset( $_GET['p'] ) ? intval( $_GET['p'] ) : 1;
 		$limit = isset( $_GET['limit'] ) ? intval( $_GET['limit'] ) : 25;
 		$order_by = isset( $_GET['order_by'] ) ? intval( $_GET['order_by'] ) : 'date';
@@ -289,6 +290,7 @@ class gk_sslcommerz_admin {
 				break;
 
 			case 'archive':
+				require_once plugin_dir_path( __FILE__ ) . '../partials/admin_payment_archive.php';
 				break;
 
 			case 'list':

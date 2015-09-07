@@ -1,8 +1,9 @@
 === SSLCommerz Payment Gateway ===
 Contributors: goodkoding
-Tags: payment gateway, payment, BDT, USD, Taka, Visa, Master Card, Internet Banking, BKash
+Tags: payment gateway, payment, BDT, Taka, Visa, Master Card, Internet Banking, BKash, Mobile Banking
 Requires at least: 3.9.2
-Tested up to: 4.0.1
+Tested up to: 4.3
+Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,6 +37,15 @@ SSLCommerz only process BDT (Bangladeshi Taka) transactions.
 
 = What about security? =
 It is recommended but not necessary to use SSL certificate on your website to receive payment. None of the card information will be collected or stored on your website. Customer (payee) will provide their sensitive information (card number, security code etc.) only on the bank's portal.
+
+== Screenshots ==
+1. Admin page to set SSLCommerz credentials. You can assess this by clicking the \"SSL Commerz\" menu at the admin side.
+2. You can set the target pages based on payment status.
+3. Set advanced options to fill the payment form.
+4. Set if you want to add service charge over the payable amount.
+5. Payment statistics page shows the list of payments along with their status.
+6. This is how a typical payment form looks like on default WordPress theme.
+7. This is the confirmation page before redirecting the user to the SSLCommerz gateway.
 
 == Changelog ==
 = 0.3 =

@@ -55,6 +55,15 @@
     color: #FAFAFA;
 }
 
+.payments-table tr.failed:hover td,
+.payments-table tr.cancelled:hover td {
+    background-color: #AB3E42;
+}
+
+.payments-table tr.pending:hover td {
+    background-color: #C9A680;
+}
+
 .payments-table tr:hover td a {
     color: #FAFAFA;
 }

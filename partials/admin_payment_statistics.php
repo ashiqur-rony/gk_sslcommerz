@@ -19,12 +19,29 @@
 			echo '</div>';
 		}
 
-		$query = $wpdb->prepare(
+	if( $archive == 1 ):
+	?>
+		<div class="gk-sslcommerz-instructions notice updated">
+			<p>
+				<?php _e( 'You are seeing the archived items.', $this->plugin_slug ); ?> <a href="<?php echo admin_url( 'admin.php?page=gk-sslcommerz-payment-statistics' ); ?>"><?php _e( 'Go back to regular list', $this->plugin_slug ); ?></a>.
+			</p>
+		</div>
+	<?php
+	else:
+	?>
+		<div class="gk-sslcommerz-instructions">
+			<p class="alignright">
+				<a class="button button-primary" href="<?php echo admin_url( 'admin.php?page=gk-sslcommerz-payment-statistics&do=list&archive=1' ); ?>"><?php _e( 'See the archived payments', $this->plugin_slug ); ?></a>
+			</p>
+		</div>
+	<?php
+	endif;
+	$query = $wpdb->prepare(
 			'SELECT * FROM `' . $wpdb->prefix . $gk_sslcommerz_payments_table . '` WHERE
 				is_archived = %d
 				ORDER BY ' . $order_by . ' ' . $order . '
 				LIMIT %d, %d ',
-			0,
+			$archive,
 			( ( $page - 1 ) * $limit ), $limit
 		);
 		$payments = $wpdb->get_results( $query );
@@ -85,15 +102,12 @@
 								<?php
 									$view_url = admin_url( 'admin.php?page=gk-sslcommerz-payment-statistics&do=invoice&id=' . $payment->idpayment );
 									$pdf_url = admin_url( 'admin.php?page=gk-sslcommerz-payment-statistics&do=pdf&id=' . $payment->idpayment );
-									$pdf_url = admin_url( 'admin.php?page=gk-sslcommerz-payment-statistics&do=archive&id=' . $payment->idpayment );
+									$archive_url = admin_url( 'admin.php?page=gk-sslcommerz-payment-statistics&do=archive&id=' . $payment->idpayment );
 								?>
 								<a href="<?php echo $view_url; ?>" title="<?php _e( 'View detail', $this->plugin_slug ); ?>">
 									<span class="dashicons dashicons-analytics"></span>
 								</a>
-								<a href="<?php echo $pdf_url; ?>" title="<?php _e( 'Download invoice', $this->plugin_slug ); ?>">
-									<span class="dashicons dashicons-download"></span>
-								</a>
-								<a href="<?php echo $pdf_url; ?>" title="<?php _e( 'Archive', $this->plugin_slug ); ?>">
+								<a href="<?php echo $archive_url; ?>" title="<?php _e( 'Archive', $this->plugin_slug ); ?>">
 									<span class="dashicons dashicons-archive"></span>
 								</a>
 							</td>
@@ -108,7 +122,7 @@
 
 			<div class="tablenav bottom">
 				<?php
-				$payment_count = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}{$gk_sslcommerz_payments_table} WHERE is_archived = %d", 0 ) );
+				$payment_count = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}{$gk_sslcommerz_payments_table} WHERE is_archived = %d", $archive ) );
 				?>
 				<div class="tablenav-pages">
 					<span class="displaying-num">

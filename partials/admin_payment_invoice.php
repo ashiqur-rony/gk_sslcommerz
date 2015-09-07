@@ -35,7 +35,7 @@
 
 			$content = '';
 
-			if( strlen( $validation_data['error'] ) > 0 ) {
+			if( isset($validation_data['error']) && strlen( $validation_data['error'] ) > 0 ) {
 				$content .= '<div class="gk-sslcommerz-instructions notice error"><p>' . nl2br( $validation_data['error'] ) . '</p></div>';
 			} elseif( $payment->payment_status == 'success' ) {
 				$content .= '<div class="gk-sslcommerz-instructions notice updated"><p>' . __( 'Payment was successful', $this->plugin_slug ) . '</p></div>';
