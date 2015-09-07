@@ -19,7 +19,6 @@ This plugin enables the feature to integrate [SSLCommerz](https://sslcommerz.com
 * Enable payment form using widget in any sidebar area
 * Integrate payment form within form using shortcode
 * Complete payment report from the admin side
-* Email notification upon successful payment
 
 == Installation ==
 1. Upload "gk-sslcommerz" directory inside the "/wp-content/plugins/" directory.
