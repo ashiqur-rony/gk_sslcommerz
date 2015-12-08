@@ -3,7 +3,7 @@
  * Plugin Name:       SSLCommerz Payment Gateway
  * Plugin URI:        https://github.com/goodkoding/gk_sslcommerz
  * Description:       Integrate the SSLCommerz payment gateway to WordPress website.
- * Version:           0.1
+ * Version:           0.3
  * Author:            GoodKoding
  * Author URI:        http://goodkoding.com
  * Text Domain:       gk-sslcommerz

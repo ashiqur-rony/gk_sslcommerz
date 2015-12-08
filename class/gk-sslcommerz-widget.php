@@ -7,7 +7,7 @@
  */
 
 if(!class_exists('gk_sslcommerz')) {
-	include plugin_dir_path( __FILE__ ) . '/gk_sslcommerz.php';
+	include plugin_dir_path( __FILE__ ) . '/gk-sslcommerz.php';
 }
 
 class gk_sslcommerz_widget extends WP_Widget {
