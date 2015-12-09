@@ -40,11 +40,11 @@ class gk_sslcommerz_widget extends WP_Widget {
 			$title = __( 'Make a payment', $this->plugin_slug );
 		}
 
-		require_once plugin_dir_path( __FILE__ ) . '../partials/admin_widget_form.php';
+		require plugin_dir_path( __FILE__ ) . '../partials/admin_widget_form.php';
 	}
 
 	public function update( $new_instance, $old_instance ) {
-		$instance = array();
+		$instance = $old_instance;
 		$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
 		return $instance;
 	}
