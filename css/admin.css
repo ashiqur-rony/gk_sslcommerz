@@ -3,18 +3,18 @@
  * @author: GoodKoding
  * @author_url: http://goodkoding.com
  **/
-.gk-sslcommerz-options h3 {
+.gk-sslcommerz-options .gk-sslcommerz-admin-form h2, .gk-sslcommerz-options .gk-sslcommerz-admin-form h3 {
     cursor: pointer;
     padding: 10px;
     background: #333333;
     color: #CCCCCC;
 }
 
-.gk-sslcommerz-options h3 span.dashicons {
+.gk-sslcommerz-options .gk-sslcommerz-admin-form h2 span.dashicons, .gk-sslcommerz-options .gk-sslcommerz-admin-form h3 span.dashicons {
     float: right;
 }
 
-.gk-sslcommerz-options h3.active {
+.gk-sslcommerz-options .gk-sslcommerz-admin-form h2.active, .gk-sslcommerz-options .gk-sslcommerz-admin-form h3.active {
     background: #039885;
     color: #FAFAFA;
 }
