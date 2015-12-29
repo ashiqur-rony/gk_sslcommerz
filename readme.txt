@@ -48,6 +48,8 @@ It is recommended but not necessary to use SSL certificate on your website to re
 7. This is the confirmation page before redirecting the user to the SSLCommerz gateway.
 
 == Changelog ==
+= 0.4 =
+* Updated CSS and JS for admin side to work properly on version 4.4
 = 0.3 =
 * Implemented the payment form widget
 = 0.2 =

@@ -33,6 +33,10 @@ SSLCommerz only process BDT (Bangladeshi Taka) transactions.
 It is recommended but not necessary to use SSL certificate on your website to receive payment. None of the card information will be collected or stored on your website. Customer (payee) will provide their sensitive information (card number, security code etc.) only on the bank's portal.
 
 ## Changelog
+**0.4**
+
+* Updated CSS and JS for admin side to work properly on version 4.4
+
 **0.3**
 
 * Implemented the payment form widget
