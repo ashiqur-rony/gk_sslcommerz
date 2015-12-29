@@ -56,3 +56,7 @@ It is recommended but not necessary to use SSL certificate on your website to re
 * Implemented payment processing
 = 0.1 =
 * Implemented the admin area for the plugin
+
+== Upgrade Notice ==
+= 0.4 =
+* Fixed the bug on settings page.
