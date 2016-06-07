@@ -3,7 +3,7 @@
  * Loader class that works as a wrapper around WordPress hooks
  *
  * @author GoodKoding
- * @url http://goodkoding.com
+ * @author_url http://goodkoding.com
  **/
 
 class gk_sslcommerz_loader {

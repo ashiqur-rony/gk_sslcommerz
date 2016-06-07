@@ -3,7 +3,7 @@
  * Class to handle SSLCommerz gateway plugin activation
  *
  * @author GoodKoding
- * @author_url http://ghumkumar.com
+ * @author_url http://goodkoding.com
  **/
 
 class gk_sslcommerz_activator {
